@@ -1,15 +1,9 @@
 import React from 'react';
 import SummaryOption from './SummaryOption';
+import SummaryList from './SummaryList';
 
 function MainSummary(props) {
-    const summary = Object.keys(props.selected).map((feature, idx) => {
-        const featureHash = feature + '-' + idx;
-        const selectedOption = props.selected[feature];
 
-        return (
-            <SummaryOption name={feature} option={selectedOption} hash={featureHash} USFormat={props.USFormat} />
-        );
-    });
 
     const total = Object.keys(props.selected).reduce(
         (acc, curr) => acc + props.selected[curr].cost,
@@ -19,7 +13,8 @@ function MainSummary(props) {
     return (
         <section className="main__summary">
             <h2>Your cart</h2>
-            {summary}
+            <SummaryList selected={props.selected}
+                         USFormat={props.USFormat}></SummaryList>
             <div className="summary__total">
                 <div className="summary__total__label">Total</div>
                 <div className="summary__total__value">
